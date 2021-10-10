@@ -15,21 +15,21 @@ const resolvers = {
             const user = await User.create(args);
             return user;
         },
-        saveBook: async (parent, { userId, book }) => {
+        saveBook: async (parent, { userId }) => {
             const book = await Book.findOneAndUpdate(
                 { _id: userId },
                 {
                     $addToSet: { savedBooks: book },
-                },
-            ),
+                }
+            )
         },
-        deleteBook: async (parent, { book }) => {
+        deleteBook: async (parent, { userId }) => {
             const book = await Book.findOneAndDelete(
                 { _id: userId},
                 { savedBooks: book },
-            ),
+            )
         },
-    },
+    }
 };
 
 
